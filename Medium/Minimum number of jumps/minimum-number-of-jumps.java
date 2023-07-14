@@ -28,38 +28,35 @@ class GFG
 
 class Solution{
     static int minJumps(int[] arr){
-        
-        int n = arr.length;
-        
+               int n = arr.length;
         if (n <= 1)
             return 0;
         
         if (arr[0] == 0)
             return -1;
         
-        int maxReach = arr[0];  // Maximum reachable index from the current position
-        int steps = arr[0];     // Number of steps remaining at the current position
-        int jumps = 1;          // Number of jumps required
+        int maxReachIndex = arr[0];
+        int currentSteps = arr[0];
+        int totalJumps = 1;
         
         for (int i = 1; i < n; i++) {
             if (i == n - 1)
-                return jumps;
+                return totalJumps;
             
-            maxReach = Math.max(maxReach, i + arr[i]);
-            steps--;
+            maxReachIndex = Math.max(maxReachIndex, i + arr[i]);
             
-            if (steps == 0) {
-                jumps++;
-                
-                if (i >= maxReach)
+            currentSteps--;
+            
+            if (currentSteps == 0) {
+                totalJumps++;
+                if (i >= maxReachIndex)
                     return -1;
-                
-                steps = maxReach - i;
+                currentSteps = maxReachIndex - i;
             }
         }
         
         return -1;
     }
     
-  
+    
 }
